@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
         android:name=".QuoteApplication"
@@ -17,7 +18,7 @@
         android:theme="@style/Theme.WorkmanagerRoomDb"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".ComposeActivity"
             android:exported="false"
             android:label="@string/title_activity_compose"
             android:theme="@style/Theme.WorkmanagerRoomDb">
@@ -26,7 +27,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ComposeActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,6 +39,17 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <service android:name=".model.services.MyJobScheduler"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
+
+        <receiver android:name=".model.utils.MyStartServiceReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>
